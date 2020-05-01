@@ -14,7 +14,7 @@
 
 ## Verify the application is running
 
-> Application listens on port 3000.
+> Application listens on port 3001.
 
 
 ## Usage [Insomnia](https://insomnia.rest/)
