@@ -25,32 +25,16 @@ public class TypeService implements FieldValueExists {
         return typeRepository.findAll();
     }
 
-    public ResponseEntity findById(Long id) {
-        return typeRepository.findById(id)
-                .map(record -> ResponseEntity.ok().body(record))
-                .orElse(ResponseEntity.notFound().build());
+    public Optional<Type> findById(Long id) {
+        return typeRepository.findById(id);
     }
 
-    public ResponseEntity<Type> create(TypeDTO typeDTO) {
-        Type typeModel = typeRepository.save(typeDTO.convertModel());
-        return new ResponseEntity<>(typeModel, HttpStatus.CREATED);
+    public Type save(Type type) {
+        return typeRepository.save(type);
     }
 
-    public ResponseEntity<?> remove(Long id) {
-        return typeRepository.findById(id)
-                .map(record -> {
-                    typeRepository.deleteById(id);
-                    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-                }).orElse(ResponseEntity.notFound().build());
-    }
-
-    public ResponseEntity update(Long id, TypeDTO typeDTO) {
-        return typeRepository.findById(id)
-                .map(record -> {
-                    record.setName(typeDTO.getName());
-                    Type updated = typeRepository.save(record);
-                    return ResponseEntity.ok().body(updated);
-                }).orElse(ResponseEntity.notFound().build());
+    public void remove(Type type) {
+        typeRepository.delete(type);
     }
 
     @Override

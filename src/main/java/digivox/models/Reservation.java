@@ -1,6 +1,5 @@
 package digivox.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,11 +20,9 @@ public class Reservation {
     private LocalDate pickUp;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class)
-    @JsonIgnore
     private Item item;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Client.class)
-    @JsonIgnore
     private Client client;
 
     public Reservation(LocalDate pickUp, Client client, Item item) {

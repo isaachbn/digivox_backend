@@ -31,6 +31,7 @@ public class Item {
         this.name = name;
         this.price = price;
         this.type = type;
+        this.rented = false;
     }
 
     public Item(Long id) {

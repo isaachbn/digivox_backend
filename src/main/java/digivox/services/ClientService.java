@@ -1,12 +1,9 @@
 package digivox.services;
 
-import digivox.dtos.ClientDTO;
 import digivox.models.Client;
 import digivox.repositories.ClientReposiitory;
 import digivox.validators.FieldValueExists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,34 +22,18 @@ public class ClientService implements FieldValueExists {
         return clientReposiitory.findAll();
     }
 
-    public ResponseEntity<Client> findById(Long id) {
-        return clientReposiitory.findById(id)
-                .map(record -> ResponseEntity.ok().body(record))
-                .orElse(ResponseEntity.notFound().build());
+    public Optional<Client> findById(Long id) {
+        return clientReposiitory.findById(id);
     }
 
-    public ResponseEntity<Client> create(ClientDTO clientDTO) {
-        Client clientModel = clientReposiitory.save(clientDTO.convertModel());
-        return new ResponseEntity<>(clientModel, HttpStatus.CREATED);
+    public Client save(Client client) {
+        return clientReposiitory.save(client);
     }
 
-    public ResponseEntity<?> remove(Long id) {
-        return clientReposiitory.findById(id)
-                .map(record -> {
-                    clientReposiitory.deleteById(id);
-                    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-                }).orElse(ResponseEntity.notFound().build());
+    public void remove(Long id) {
+        clientReposiitory.deleteById(id);
     }
 
-    public ResponseEntity<Client> update(Long id, ClientDTO clientDTO) {
-        return clientReposiitory.findById(id)
-                .map(item -> {
-                    item.setName(clientDTO.getName());
-                    item.setEmail(clientDTO.getEmail());
-                    Client updated = clientReposiitory.save(item);
-                    return ResponseEntity.ok().body(updated);
-                }).orElse(ResponseEntity.notFound().build());
-    }
 
     @Override
     public boolean fieldValueExists(Object value, String fieldName) throws UnsupportedOperationException {

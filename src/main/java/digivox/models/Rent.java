@@ -1,11 +1,9 @@
 package digivox.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.net.ssl.SSLSession;
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -25,11 +23,9 @@ public class Rent {
     private LocalDate delivery;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Item.class)
-    @JsonIgnore
     private Item item;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Client.class)
-    @JsonIgnore
     private Client client;
 
     public Rent(LocalDate delivery, Client client, Item item) {
