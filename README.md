@@ -16,7 +16,12 @@
 
 > Application listens on port 3001.
 
+## Documentation
 
-## Usage [Insomnia](https://insomnia.rest/)
+[json](http://localhost:3001/api-docs)
 
-[Documentation Export](insomnia/documentation.json)
+[html](http://localhost:3001/api-ui.html)
+
+### Usage Requests [Insomnia](https://insomnia.rest/)
+
+[Workspace import](insomnia/documentation.json)
