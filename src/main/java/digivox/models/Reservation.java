@@ -1,5 +1,6 @@
 package digivox.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class Reservation {
     private Long id;
 
     @Column(name = "pick_up")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate pickUp;
 
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class)
