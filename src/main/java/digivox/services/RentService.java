@@ -5,7 +5,6 @@ import digivox.repositories.RentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
@@ -22,14 +21,16 @@ public class RentService {
         return rentRepository.findAll();
     }
 
-    public List<Rent> findAllByWithdrawalPlusWeek() {
+    public List<Rent> findAllRentedWeekly() {
         LocalDate now = LocalDate.now();
         TemporalField fieldISO = WeekFields.of(Locale.US).dayOfWeek();
-        return rentRepository.findAllByWithdrawalPlusWeek(now.with(fieldISO, 1));
+        return rentRepository.findAllRentedOrDeliveredWeekly(now.with(fieldISO, 1), false);
     }
 
-    public List<Rent> findRented() {
-        return rentRepository.findByDeliveredIsTrue();
+    public List<Rent> findAllDeliveredWeekly() {
+        LocalDate now = LocalDate.now();
+        TemporalField fieldISO = WeekFields.of(Locale.US).dayOfWeek();
+        return rentRepository.findAllRentedOrDeliveredWeekly(now.with(fieldISO, 1), true);
     }
 
     public Rent save(Rent rent) {

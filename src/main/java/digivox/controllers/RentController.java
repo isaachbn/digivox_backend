@@ -26,11 +26,11 @@ public class RentController {
             @RequestParam(name = "rented", defaultValue = "false", required = false) Boolean rented
     ) {
         if (rented) {
-            return rentService.findAllByWithdrawalPlusWeek();
+            return rentService.findAllRentedWeekly();
         }
 
         if (delivered) {
-            return rentService.findRented();
+            return rentService.findAllDeliveredWeekly();
         }
 
         return rentService.findAll();
