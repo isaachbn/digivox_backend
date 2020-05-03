@@ -2,20 +2,16 @@ package digivox.services;
 
 import digivox.models.Rent;
 import digivox.repositories.RentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class RentService {
     private final RentRepository rentRepository;
-
-    @Autowired
-    public RentService(RentRepository rentRepository) {
-        this.rentRepository = rentRepository;
-    }
 
     public List<Rent> findAll() {
         return rentRepository.findAll();

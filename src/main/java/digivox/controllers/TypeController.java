@@ -3,7 +3,7 @@ package digivox.controllers;
 import digivox.dtos.TypeDTO;
 import digivox.models.Type;
 import digivox.services.TypeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +14,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping({"/api/types"})
+@AllArgsConstructor
 public class TypeController {
     private final TypeService typeService;
-
-    @Autowired
-    public TypeController(TypeService typeService) {
-        this.typeService = typeService;
-    }
 
     @GetMapping
     public List findAll() {

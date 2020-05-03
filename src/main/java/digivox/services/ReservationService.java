@@ -2,20 +2,16 @@ package digivox.services;
 
 import digivox.models.Reservation;
 import digivox.repositories.ReservationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ReservationService {
     private final ReservationRepository reservationRepository;
-
-    @Autowired
-    public ReservationService(ReservationRepository reservationRepository) {
-        this.reservationRepository = reservationRepository;
-    }
 
     public List<Reservation> findAll() {
         return reservationRepository.findAll();

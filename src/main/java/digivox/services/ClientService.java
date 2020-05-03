@@ -3,20 +3,16 @@ package digivox.services;
 import digivox.models.Client;
 import digivox.repositories.ClientReposiitory;
 import digivox.validators.FieldValueExists;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ClientService implements FieldValueExists {
     private final ClientReposiitory clientReposiitory;
-
-    @Autowired
-    public ClientService(ClientReposiitory clientReposiitory) {
-        this.clientReposiitory = clientReposiitory;
-    }
 
     public List<Client> findAll() {
         return clientReposiitory.findAll();

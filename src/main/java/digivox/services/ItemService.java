@@ -3,20 +3,16 @@ package digivox.services;
 import digivox.models.Item;
 import digivox.repositories.ItemRepository;
 import digivox.validators.FieldValueExists;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ItemService implements FieldValueExists {
     private final ItemRepository itemRepository;
-
-    @Autowired
-    public ItemService(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
-    }
 
     public List<Item> findAll() {
         return itemRepository.findAll();

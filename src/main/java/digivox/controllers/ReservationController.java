@@ -1,10 +1,9 @@
 package digivox.controllers;
 
 import digivox.dtos.ReservationDTO;
-import digivox.models.Client;
 import digivox.models.Reservation;
 import digivox.services.ReservationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +14,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping({"/api/reservations"})
+@AllArgsConstructor
 public class ReservationController {
     private final ReservationService reservationService;
-
-    @Autowired
-    public ReservationController(ReservationService reservationService) {
-        this.reservationService = reservationService;
-    }
 
     @GetMapping
     public List findAll() {

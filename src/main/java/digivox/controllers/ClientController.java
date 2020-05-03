@@ -3,7 +3,7 @@ package digivox.controllers;
 import digivox.dtos.ClientDTO;
 import digivox.models.Client;
 import digivox.services.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +14,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping({"/api/clients"})
+@AllArgsConstructor
 public class ClientController {
     private final ClientService clientService;
-
-    @Autowired
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
 
     @GetMapping
     public List findAll() {

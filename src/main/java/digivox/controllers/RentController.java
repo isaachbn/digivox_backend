@@ -2,10 +2,9 @@ package digivox.controllers;
 
 import digivox.dtos.RentDTO;
 import digivox.models.Rent;
-import digivox.models.Reservation;
 import digivox.services.ItemService;
 import digivox.services.RentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +15,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping({"/api/rents"})
+@AllArgsConstructor
 public class RentController {
     private final RentService rentService;
     private final ItemService itemService;
-
-    @Autowired
-    public RentController(RentService rentService, ItemService itemService) {
-        this.rentService = rentService;
-        this.itemService = itemService;
-    }
 
     @GetMapping
     public List findAll() {

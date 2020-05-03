@@ -5,7 +5,7 @@ import digivox.models.Item;
 import digivox.models.Type;
 import digivox.services.ItemService;
 import digivox.services.TypeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +16,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping({"/api/items"})
+@AllArgsConstructor
 public class ItemController {
     private final ItemService itemService;
     private final TypeService typeService;
-
-    @Autowired
-    public ItemController(ItemService itemService, TypeService typeService) {
-        this.itemService = itemService;
-        this.typeService = typeService;
-    }
 
     @GetMapping
     public List findAll() {
