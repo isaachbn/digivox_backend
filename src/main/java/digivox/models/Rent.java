@@ -17,11 +17,11 @@ public class Rent {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "withdrawal", nullable = false)
+    @Column(name = "withdrawal", nullable = false, columnDefinition = "DATE")
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate withdrawal;
 
-    @Column(name = "delivery")
+    @Column(name = "delivery", columnDefinition = "DATE")
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate delivery;
 
@@ -31,10 +31,14 @@ public class Rent {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Client.class)
     private Client client;
 
+    @Column(name = "delivered", nullable = false, columnDefinition = "boolean default false")
+    private Boolean delivered;
+
     public Rent(LocalDate delivery, Client client, Item item) {
         this.delivery = delivery;
         this.client = client;
         this.item = item;
         this.withdrawal = LocalDate.now();
+        this.delivered = false;
     }
 }

@@ -21,15 +21,15 @@ public class RentController {
     private final ItemService itemService;
 
     @GetMapping
-    public List findAll() {
-        return rentService.findAll();
+    public List findAll(@RequestParam(name = "delivered", defaultValue = "false", required = false) Boolean delivered) {
+        return delivered ? rentService.findRented() : rentService.findAllByWithdrawalPlusWeek();
     }
 
     @GetMapping(path = {"/{id}"})
     public ResponseEntity findById(@PathVariable long id) {
-        Optional<Rent> rebOptional = rentService.findById(id);
+        Optional<Rent> rentOptional = rentService.findById(id);
 
-        return rebOptional
+        return rentOptional
                 .map(record -> ResponseEntity.ok().body(record))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -45,14 +45,16 @@ public class RentController {
         return new ResponseEntity(rentModel, HttpStatus.CREATED);
     }
 
-    @DeleteMapping(path ={"/{id}"})
-    public ResponseEntity<?> delete(@PathVariable long id) {
-        Optional<Rent> rentModel = rentService.findById(id);
-        return rentModel
+    @PatchMapping(path = "/{id}/deliver")
+    public ResponseEntity<Rent> deliver(@PathVariable long id) {
+        Optional<Rent> rentOptional = rentService.findById(id);
+        return rentOptional
                 .map(rent -> {
                     itemService.unRented(rent.getItem().getId());
-                    rentService.remove(id);
-                    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+                    rent.setDelivered(true);
+                    rentService.save(rent);
+                    return ResponseEntity.ok().body(rent);
                 }).orElse(ResponseEntity.notFound().build());
+
     }
 }

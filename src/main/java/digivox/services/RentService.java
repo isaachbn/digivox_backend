@@ -5,6 +5,7 @@ import digivox.repositories.RentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,16 +14,18 @@ import java.util.Optional;
 public class RentService {
     private final RentRepository rentRepository;
 
-    public List<Rent> findAll() {
-        return rentRepository.findAll();
+    public List<Rent> findAllByWithdrawalPlusWeek() {
+        LocalDate localDateNow = LocalDate.now();
+        LocalDate localDateWeek = LocalDate.now().plusDays(7);
+        return rentRepository.findAllByWithdrawalPlusWeek(localDateNow, localDateWeek);
+    }
+
+    public List<Rent> findRented() {
+        return rentRepository.findByDeliveredIsTrue();
     }
 
     public Rent save(Rent rent) {
         return rentRepository.save(rent);
-    }
-
-    public void remove(Long id) {
-        rentRepository.deleteById(id);
     }
 
     public Optional<Rent> findById(Long id) {

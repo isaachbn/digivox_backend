@@ -21,10 +21,10 @@ public class Reservation {
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate pickUp;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Item.class)
     private Item item;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Client.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Client.class)
     private Client client;
 
     public Reservation(LocalDate pickUp, Client client, Item item) {
