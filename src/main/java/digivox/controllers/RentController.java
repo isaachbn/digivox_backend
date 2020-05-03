@@ -21,8 +21,19 @@ public class RentController {
     private final ItemService itemService;
 
     @GetMapping
-    public List findAll(@RequestParam(name = "delivered", defaultValue = "false", required = false) Boolean delivered) {
-        return delivered ? rentService.findRented() : rentService.findAllByWithdrawalPlusWeek();
+    public List findAll(
+            @RequestParam(name = "delivered", defaultValue = "false", required = false) Boolean delivered,
+            @RequestParam(name = "rented", defaultValue = "false", required = false) Boolean rented
+    ) {
+        if (rented) {
+            return rentService.findAllByWithdrawalPlusWeek();
+        }
+
+        if (delivered) {
+            return rentService.findRented();
+        }
+
+        return rentService.findAll();
     }
 
     @GetMapping(path = {"/{id}"})

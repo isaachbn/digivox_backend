@@ -11,11 +11,8 @@ import java.util.List;
 
 @Repository
 public interface RentRepository extends JpaRepository<Rent, Long> {
-    @Query("select r from rents r where r.withdrawal between :dateNow and :datePlusWeek")
-    List<Rent> findAllByWithdrawalPlusWeek(
-            @Param("dateNow") LocalDate dateNow,
-            @Param("datePlusWeek") LocalDate datePlusWeek
-    );
+    @Query("select r from rents r where r.withdrawal >= :datePlusWeek and r.delivered=false")
+    List<Rent> findAllByWithdrawalPlusWeek(@Param("datePlusWeek") LocalDate datePlusWeek);
 
     List<Rent> findByDeliveredIsTrue();
 }
