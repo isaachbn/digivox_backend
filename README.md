@@ -4,13 +4,14 @@
 
 - Package the application
 
-`$ ./mvnw clean package`
+      $ ./mvnw clean package
 
-`$ mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)`
+      $ mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 ## Run
 
-`$ docker-compose up --build -d`
+    $ docker-compose up --build -d`
+
 
 ## Verify the application is running
 
@@ -18,10 +19,10 @@
 
 ## Documentation
 
-[json](http://localhost:3001/api-docs)
+> [json](http://localhost:3001/api-docs)
 
-[html](http://localhost:3001/api-ui.html)
+> [html](http://localhost:3001/api-ui.html)
 
 ### Usage Requests [Insomnia](https://insomnia.rest/)
 
-[Workspace import](insomnia/documentation.json)
+> [Workspace import](insomnia/documentation.json)
