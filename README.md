@@ -10,7 +10,7 @@
 
 ## Run
 
-    $ docker-compose up --build -d`
+    $ docker-compose up --build -d
 
 
 ## Verify the application is running
